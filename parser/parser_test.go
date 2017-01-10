@@ -42,42 +42,42 @@ func TestParseMsisdn(t *testing.T) {
 
 	for _, number := range numbers {
 		info, _ := ParseMsisdn(number)
-		if info.dialing_number != "386" {
-			t.Errorf("dialing number wrong. got=%s", info.dialing_number)
+		if info.DialingNumber != "386" {
+			t.Errorf("dialing number wrong. got=%s", info.DialingNumber)
 		}
 
 		info, err := ParseMsisdn("+38631123123")
 		if err != nil {
 			t.Errorf("err not nil. got=%s", err)
 		}
-		if info.country_code != "SI" {
-			t.Errorf("country code wrong. got=%s", info.country_code)
+		if info.CountryCode != "SI" {
+			t.Errorf("country code wrong. got=%s", info.CountryCode)
 		}
-		if info.dialing_number != "386" {
-			t.Errorf("dialing number wrong. got=%s", info.dialing_number)
+		if info.DialingNumber != "386" {
+			t.Errorf("dialing number wrong. got=%s", info.DialingNumber)
 		}
-		if info.mno_identifier != "Mobitel" {
-			t.Errorf("mno identifier wrong. got=%s", info.mno_identifier)
+		if info.MnoIdentifier != "Mobitel" {
+			t.Errorf("mno identifier wrong. got=%s", info.MnoIdentifier)
 		}
-		if info.subscriber_number != "31123123" {
-			t.Errorf("subscriber number wrong. got=%s", info.subscriber_number)
+		if info.SubscriberNumber != "31123123" {
+			t.Errorf("subscriber number wrong. got=%s", info.SubscriberNumber)
 		}
 
 		info, err = ParseMsisdn("+38531123123")
 		if err != nil {
 			t.Errorf("err not nil. got=%s", err)
 		}
-		if info.country_code != "HR" {
-			t.Errorf("country code wrong. got=%s", info.country_code)
+		if info.CountryCode != "HR" {
+			t.Errorf("country code wrong. got=%s", info.CountryCode)
 		}
-		if info.dialing_number != "385" {
-			t.Errorf("dialing number wrong. got=%s", info.dialing_number)
+		if info.DialingNumber != "385" {
+			t.Errorf("dialing number wrong. got=%s", info.DialingNumber)
 		}
-		if info.mno_identifier != "unknown" {
-			t.Errorf("mno identifier wrong. got=%s", info.mno_identifier)
+		if info.MnoIdentifier != "unknown" {
+			t.Errorf("mno identifier wrong. got=%s", info.MnoIdentifier)
 		}
-		if info.subscriber_number != "31123123" {
-			t.Errorf("subscriber number wrong. got=%s", info.subscriber_number)
+		if info.SubscriberNumber != "31123123" {
+			t.Errorf("subscriber number wrong. got=%s", info.SubscriberNumber)
 		}
 
 		info, err = ParseMsisdn("+12331123123")

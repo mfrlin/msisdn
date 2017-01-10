@@ -25,10 +25,10 @@ func init() {
 }
 
 type MsisdnInfo struct {
-	country_code string
-	dialing_number string
-	mno_identifier string
-	subscriber_number string
+	CountryCode      string `json:"country_code"`
+	DialingNumber    string `json:"dialing_number"`
+	MnoIdentifier    string `json:"mno_identifier"`
+	SubscriberNumber string `json:"subscriber_name"`
 }
 
 func ParseMsisdn(msisdn string) (MsisdnInfo, error) {
@@ -38,10 +38,10 @@ func ParseMsisdn(msisdn string) (MsisdnInfo, error) {
 		code, ok := calling_codes[dialing_number]
 		if ok {
 			subscriber_number := msisdn[i:]
-			return MsisdnInfo{country_code: code,
-				dialing_number: dialing_number,
-				mno_identifier: findMnoIdentifier(code, subscriber_number),
-				subscriber_number: subscriber_number}, nil
+			return MsisdnInfo{CountryCode: code,
+				DialingNumber: dialing_number,
+				MnoIdentifier: findMnoIdentifier(code, subscriber_number),
+				SubscriberNumber: subscriber_number}, nil
 		}
 	}
 	return MsisdnInfo{}, errors.New("Country code not found.")
