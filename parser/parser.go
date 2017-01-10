@@ -18,7 +18,7 @@ type MsisdnInfo struct {
 	CountryCode      string `json:"country_code"`
 	DialingNumber    string `json:"dialing_number"`
 	MnoIdentifier    string `json:"mno_identifier"`
-	SubscriberNumber string `json:"subscriber_name"`
+	SubscriberNumber string `json:"subscriber_number"`
 }
 
 func ParseMsisdn(msisdn string) (MsisdnInfo, error) {
