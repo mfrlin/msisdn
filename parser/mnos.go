@@ -1,3 +1,6 @@
+package parser
+
+var mnos = []byte(`
 {
   "SI": {
     "30": "Si.mobil",
@@ -11,3 +14,4 @@
     "71": "Mobitel"
   }
 }
+`)

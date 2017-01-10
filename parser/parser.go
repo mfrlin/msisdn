@@ -3,9 +3,6 @@ package parser
 import (
 	"encoding/json"
 	"errors"
-	"io/ioutil"
-	"path/filepath"
-	"runtime"
 	"strings"
 )
 
@@ -13,14 +10,7 @@ var callingCodes map[string]string
 var mnoIdentifiers map[string](map[string]string)
 
 func init() {
-	// this is a replacement for os.path.dirname(os.path.realpath(__file__)) in python
-	// TODO: it's probably a hack and should be solved in another manner
-	_, currentFile, _, _ := runtime.Caller(1)
-	dir := filepath.Dir(currentFile)
-	countries, _ := ioutil.ReadFile(filepath.Join(dir, "/resources/countries.json"))
 	json.Unmarshal(countries, &callingCodes)
-
-	mnos, _ := ioutil.ReadFile(filepath.Join(dir, "/resources/mnos.json"))
 	json.Unmarshal(mnos, &mnoIdentifiers)
 }
 
