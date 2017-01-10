@@ -1,9 +1,13 @@
 {
   "SI": {
-    "31": "simobil",
-    "41": "simobil",
-    "30": "simobil",
-    "40": "simobil",
-    "70": "simobil"
+    "30": "Si.mobil",
+    "31": "Mobitel",
+    "40": "Si.mobil",
+    "41": "Mobitel",
+    "49": "Mobitel",
+    "51": "Mobitel",
+    "64": "T-2",
+    "70": "Telemach Mobile",
+    "71": "Mobitel"
   }
 }

@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Print(parser.Parse_msisdn("38631661482"))
+	fmt.Print(parser.ParseMsisdn("38631123123"))
 }
