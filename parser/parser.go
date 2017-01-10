@@ -1,27 +1,27 @@
 package parser
 
 import (
-	"io/ioutil"
 	"encoding/json"
-	"strings"
 	"errors"
-	"runtime"
+	"io/ioutil"
 	"path/filepath"
+	"runtime"
+	"strings"
 )
 
-var calling_codes map[string]string
-var mno_identifiers map[string](map[string]string)
+var callingCodes map[string]string
+var mnoIdentifiers map[string](map[string]string)
 
 func init() {
 	// this is a replacement for os.path.dirname(os.path.realpath(__file__)) in python
 	// TODO: it's probably a hack and should be solved in another manner
-	_, current_file, _, _ := runtime.Caller(1)
-	dir := filepath.Dir(current_file)
+	_, currentFile, _, _ := runtime.Caller(1)
+	dir := filepath.Dir(currentFile)
 	countries, _ := ioutil.ReadFile(filepath.Join(dir, "/resources/countries.json"))
-	json.Unmarshal(countries, &calling_codes)
+	json.Unmarshal(countries, &callingCodes)
 
 	mnos, _ := ioutil.ReadFile(filepath.Join(dir, "/resources/mnos.json"))
-	json.Unmarshal(mnos, &mno_identifiers)
+	json.Unmarshal(mnos, &mnoIdentifiers)
 }
 
 type MsisdnInfo struct {
@@ -33,15 +33,15 @@ type MsisdnInfo struct {
 
 func ParseMsisdn(msisdn string) (MsisdnInfo, error) {
 	start := findMsisdnStart(msisdn)
-	for i := start+1; i <= len(msisdn); i++ {
-		dialing_number := msisdn[start:i]
-		code, ok := calling_codes[dialing_number]
+	for i := start + 1; i <= len(msisdn); i++ {
+		dialingNumber := msisdn[start:i]
+		code, ok := callingCodes[dialingNumber]
 		if ok {
-			subscriber_number := msisdn[i:]
+			subscriberNumber := msisdn[i:]
 			return MsisdnInfo{CountryCode: code,
-				DialingNumber: dialing_number,
-				MnoIdentifier: findMnoIdentifier(code, subscriber_number),
-				SubscriberNumber: subscriber_number}, nil
+				DialingNumber:    dialingNumber,
+				MnoIdentifier:    findMnoIdentifier(code, subscriberNumber),
+				SubscriberNumber: subscriberNumber}, nil
 		}
 	}
 	return MsisdnInfo{}, errors.New("Country code not found.")
@@ -57,13 +57,13 @@ func findMsisdnStart(msisdn string) int {
 	return 0
 }
 
-func findMnoIdentifier(country_code string, subscriber_number string) string {
-	mnos := mno_identifiers[country_code]
-	for i := 1; i <= len(subscriber_number); i++ {
+func findMnoIdentifier(countryCode string, subscriberNumber string) string {
+	mnos := mnoIdentifiers[countryCode]
+	for i := 1; i <= len(subscriberNumber); i++ {
 		var ok bool
-		mno_identifier, ok := mnos[subscriber_number[0: i]]
+		mnoIdentifier, ok := mnos[subscriberNumber[0:i]]
 		if ok {
-			return mno_identifier
+			return mnoIdentifier
 		}
 	}
 	return "unknown"

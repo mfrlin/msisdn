@@ -3,6 +3,7 @@ package parser
 import (
 	"testing"
 )
+
 // TODO: research unit testing libraries. this is too much boilerplate code
 
 func TestFindMsisdnStart(t *testing.T) {
@@ -22,18 +23,18 @@ func TestFindMsisdnStart(t *testing.T) {
 }
 
 func TestResources(t *testing.T) {
-	if l := len(mno_identifiers); l != 1 {
-		t.Errorf("wrong number of keys in mno_identifiers. got=%d", l)
+	if l := len(mnoIdentifiers); l != 1 {
+		t.Errorf("wrong number of keys in mnoIdentifiers. got=%d", l)
 	}
 
-	si_mnos := mno_identifiers["SI"]
-	if l := len(si_mnos); l != 9 {
+	siMnos := mnoIdentifiers["SI"]
+	if l := len(siMnos); l != 9 {
 		t.Errorf("wrong number of keys in SI mnos. got=%d", l)
 
 	}
 
-	if l := len(calling_codes); l != 2 {
-		t.Errorf("wrong number of keys in calling_codes. got=%d", l)
+	if l := len(callingCodes); l != 2 {
+		t.Errorf("wrong number of keys in callingCodes. got=%d", l)
 	}
 }
 
@@ -89,8 +90,6 @@ func TestParseMsisdn(t *testing.T) {
 
 		}
 
-
 	}
-
 
 }
