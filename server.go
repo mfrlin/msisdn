@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"msisdn/parser"
 	"net/http"
 )
@@ -19,6 +20,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	var port = flag.String("port", "8080", "Port on which server should listen")
+	flag.Parse()
 	http.HandleFunc("/", handler)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":"+*port, nil)
 }
